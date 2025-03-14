@@ -25,7 +25,7 @@
             chatbox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
             inputField.value = "";
 
-            fetch("https://script.google.com/macros/s/AKfycbxqH8gphmNNjUUiramNtewpldVkJRr7afqj0X0zjqeh62lvrq3O9H72MXb4LwaxWgPRGA/exec", { // Replace with your Google Apps Script URL
+            fetch("https://script.google.com/macros/s/AKfycbzM1qCjb-CVZ6NkZon_1FTkc03nIU_b7XQeCiKMFCrF6Wtn_m6JgG4loSOtw5T1RbtLtQ/exec", { // Replace with your Google Apps Script URL
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: userMessage })
