@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CACI Job Counselor</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chatbox { width: 50%; margin: auto; border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: scroll; }
+        #inputField { width: 60%; padding: 8px; }
+        #sendButton { padding: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Job Counselor Chatbot</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="inputField" placeholder="Ask a job-related question...">
+    <button id="sendButton">Send</button>
+
+    <script>
+        const chatbox = document.getElementById("chatbox");
+        const inputField = document.getElementById("inputField");
+        const sendButton = document.getElementById("sendButton");
+        
+        sendButton.addEventListener("click", function() {
+            const userMessage = inputField.value;
+            chatbox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+            inputField.value = "";
+
+            fetch("YOUR_GOOGLE_APPS_SCRIPT_URL", { // Replace with your Google Apps Script URL
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botMessage = data.choices[0].message.content;
+                chatbox.innerHTML += `<p><strong>Chatbot:</strong> ${botMessage}</p>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>
